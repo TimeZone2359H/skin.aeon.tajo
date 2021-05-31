@@ -6,6 +6,9 @@
 	<onload condition="String.IsEqual(Skin.String(Overlay.Toggle),2)">SetProperty(Overlay.Path,overlays/showcase/2/,home)</onload>
 	<onload condition="String.IsEqual(Skin.String(Overlay.Toggle),3)">SetProperty(Overlay.Path,overlays/showcase/3/,home)</onload>
 	<onload condition="Skin.HasSetting(Disable.Resumable)">SetProperty(Overlay.Resumable,True,home)</onload>
+	<!-- timeZone mod start, check if skin has skin info service addon -->
+	<onload condition="System.HasAddon(script.skin.info.service)">RunScript(script.skin.info.service)</onload>
+	<!-- timeZone mod end -->
 	<!-- Intro -->
 	<onload condition="!Skin.HasSetting(Enable.StartupIntro)">ReplaceWindow($INFO[System.StartupWindow])</onload>
 	<onunload condition="Skin.HasSetting(Enable.StartupIntro)">PlayerControl(Stop)</onunload>
