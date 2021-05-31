@@ -137,7 +137,9 @@
 			</itemlayout>
 			<focusedlayout>
 			</focusedlayout>
-			<content>plugin://script.embuary.helper/?info=getresourceimages&amp;addon=resource.images.studios.white&amp;separator='" / "'&amp;string='$ESCINFO[ListItem.Studio]'</content>
+			<!-- timeZone mod start, change studios.white to studios.coloured -->
+			<content>plugin://script.embuary.helper/?info=getresourceimages&amp;addon=resource.images.studios.coloured&amp;separator='" / "'&amp;string='$ESCINFO[ListItem.Studio]'</content>
+			<!-- timeZone mod start end -->
 		</control>
 		<control type="multiimage" id="7975">
 			<include>HiddenObject</include>
@@ -333,8 +335,8 @@
 							<control type="image" id="800011">
 								<top>12</top>
 								<left>8</left>
-								<width>135</width>
-								<height>68</height>
+								<width>200</width>
+								<height>90</height>
 								<aspectratio align="center">keep</aspectratio>
 								<fadetime>250</fadetime>
 								<colordiffuse>white</colordiffuse>
@@ -433,7 +435,8 @@
 					</control>
 				</control>
 				<!-- Details Panel -->
-				<control type="label">
+				<!-- timeZone mod start, modify movie set -->
+				<!-- <control type="label">
 					<visible>String.IsEqual(ListItem.DBTYPE,set)</visible>
 					<top>120</top>
 					<left>25</left>
@@ -473,10 +476,26 @@
 						</focusedlayout>
 						<content sortby="year" sortorder="ascending">$INFO[ListItem.FolderPath]</content>
 					</control>
-				</control>
+				</control> -->
+				<!-- timeZone mod end -->
 				<control type="group">
 					<left>3</left>
 					<top>112</top>
+					<!-- timeZone mod start, add control to make labels clickable -->
+					<control type="button" id="64">
+						<top>83</top>
+						<width>1198</width>
+						<height>351</height>
+						<include>ButtonInfoDialogsCommonValues</include>
+						<onunfocus>ClearProperty(MoreInfoTitle,movieinformation)</onunfocus>
+						<onunfocus>ClearProperty(MoreInfoContent,movieinformation)</onunfocus>
+						<onclick>SetFocus(300)</onclick>
+						<onleft>SetFocus(300)</onleft>
+						<onright>SetFocus(300)</onright>
+						<onup>SetFocus(300)</onup>
+						<ondown>SetFocus(300)</ondown>
+					</control>
+					<!-- timeZone mod end -->
 					<control type="panel" id="300">
 						<top>78</top>
 						<width>1198</width>
@@ -557,6 +576,16 @@
 							</control>
 						</focusedlayout>
 						<content>
+							<!-- timeZone mod start, add a few more labels and add clickable feature (features copy pasted from Aeon Nox Silvo Matrix) --> 
+							<!-- timeZone add movie set years -->
+							<item>
+								<label>$INFO[Window(Home).Property(SkinInfo.Set.Movies.Years)]</label>
+								<label2>$LOCALIZE[652]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[652])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[Window(Home).Property(SkinInfo.Set.Movies.Years)])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(Window(Home).Property(SkinInfo.Set.Movies.Years))</visible>
+							</item>
 							<item>
 								<label>$INFO[ListItem.Director]</label>
 								<label2>$LOCALIZE[20339]:</label2>
@@ -566,21 +595,79 @@
 								<onclick condition="!System.HasAddon(script.embuary.info)">SendClick(2003,13)</onclick>
 								<visible>!String.IsEmpty(ListItem.Director)</visible>
 							</item>
+							<!-- timeZone mod start, add set director and make it label clickable -->
+							<item>
+								<label>$INFO[Window(Home).Property(SkinInfo.Set.Movies.Director)]</label>
+								<label2>$LOCALIZE[20339]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[20339])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[Window(Home).Property(SkinInfo.Set.Movies.Director)])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(Window(Home).Property(SkinInfo.Set.Movies.Director))</visible>
+							</item>
 							<item>
 								<label>$INFO[ListItem.Writer]</label>
 								<label2>$LOCALIZE[20417]:</label2>
 								<onclick condition="System.HasAddon(script.embuary.info)">RunScript(script.embuary.info,call=person,query='"$INFO[ListItem.Writer]"')</onclick>
 								<visible>!String.IsEmpty(ListItem.Writer) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
 							</item>
+							<!-- timeZone add set writer and make it clickable -->
+							<item>
+								<label>$INFO[Window(Home).Property(SkinInfo.Set.Movies.Writer)]</label>
+								<label2>$LOCALIZE[20417]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[20417])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[Window(Home).Property(SkinInfo.Set.Movies.Writer)])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(Window(Home).Property(SkinInfo.Set.Movies.Writer))</visible>
+							</item>
+							<!-- timeZone add series status i.e cancelled, returning etc -->
+							<item>
+								<label>$INFO[ListItem.Status]</label>
+								<label2>Status:</label2>
+								<visible>String.IsEqual(ListItem.DBTYPE,tvshow) + !String.IsEmpty(ListItem.Status))</visible>
+							</item>
+							<!-- timeZone add series last aired -->
+							<item>
+								<label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired.Season),S]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired.Episode),E, - ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired.Name)]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired), (,)]</label>
+								<label2>Last Aired:</label2>
+								<visible>String.IsEqual(ListItem.DBTYPE,tvshow) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Last_Aired))</visible>
+							</item>
+							<!-- timeZone add series next aired -->
+							<item>
+								<label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Season),S]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Episode),E, - ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Name)]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), (,)]</label>
+								<label2>Next Aired:</label2>
+								<visible>String.IsEqual(ListItem.DBTYPE,tvshow) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Next_Aired))</visible>
+							</item>
+							<!-- timeZone make genre clickable -->
 							<item>
 								<label>$INFO[ListItem.Genre]</label>
 								<label2>$LOCALIZE[515]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[515])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[ListItem.Genre])</onclick>
+								<onclick>SetFocus(64)</onclick>
 								<visible>!String.IsEmpty(ListItem.Genre) + !String.IsEqual(ListItem.DBTYPE,episode) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
 							</item>
+							<!-- timeZone add set genre and make it clickable  -->
+							<item>
+								<label>$INFO[Window(Home).Property(SkinInfo.Set.Movies.Genre)]</label>
+								<label2>$LOCALIZE[515]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[515])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[Window(Home).Property(SkinInfo.Set.Movies.Genre)])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(Window(Home).Property(SkinInfo.Set.Movies.Genre))</visible>
+							</item>
+							<!-- timeZone mod end -->
 							<item>
 								<label>$INFO[ListItem.Country]</label>
 								<label2>$LOCALIZE[574]:</label2>
 								<visible>!String.IsEmpty(ListItem.Country) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
+							</item>
+							<item>
+								<label>$INFO[Window(Home).Property(SkinInfo.Set.Movies.Country)]</label>
+								<label2>$LOCALIZE[574]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[574])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[Window(Home).Property(SkinInfo.Set.Movies.Country)])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(Window(Home).Property(SkinInfo.Set.Movies.Country))</visible>
 							</item>
 							<item>
 								<label>$INFO[ListItem.Premiered]</label>
@@ -593,13 +680,27 @@
 								<visible>!String.IsEmpty(ListItem.Premiered) + String.IsEqual(ListItem.DBTYPE,movie) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
 							</item>
 							<item>
+								<label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Budget)]</label>
+								<label2>Budget:</label2>
+								<visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Budget)) + String.IsEqual(ListItem.DBTYPE,movie) + !String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Budget),0)</visible>
+							</item>
+							<item>
+								<label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Revenue)]</label>
+								<label2>Revenue:</label2>
+								<visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Budget)) + String.IsEqual(ListItem.DBTYPE,movie) + !String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Budget),0)</visible>
+							</item>
+							<item>
 								<label>[LOWERCASE]$INFO[ListItem.Property(AudioLanguage.1)] $VAR[audiochannelstajo1] $INFO[ListItem.Property(AudioCodec.1)]$INFO[ListItem.Property(AudioLanguage.2), / ] $VAR[audiochannelstajo2] $INFO[ListItem.Property(AudioCodec.2)]$INFO[ListItem.Property(AudioLanguage.3), / ] $VAR[audiochannelstajo3] $INFO[ListItem.Property(AudioCodec.3)]$INFO[ListItem.Property(AudioLanguage.4), / ] $VAR[audiochannelstajo4] $INFO[ListItem.Property(AudioCodec.4)]$INFO[ListItem.Property(AudioLanguage.5), / ] $VAR[audiochannelstajo5] $INFO[ListItem.Property(AudioCodec.5)]$INFO[ListItem.Property(AudioLanguage.6), / ] $VAR[audiochannelstajo6] $INFO[ListItem.Property(AudioCodec.6)]$INFO[ListItem.Property(AudioLanguage.7), / ] $VAR[audiochannelstajo7] $INFO[ListItem.Property(AudioCodec.7)][/LOWERCASE]</label>
 								<label2>$LOCALIZE[292]:</label2>
 								<visible>[!String.IsEmpty(ListItem.Property(AudioLanguage.1)) | !String.IsEmpty(ListItem.Property(AudioLanguage.4))] + !String.IsEmpty(ListItem.AudioCodec) </visible>
 							</item>
+							<!-- timeZone make subtitle clickable -->
 							<item>
 								<label>[LOWERCASE]$INFO[ListItem.Property(SubtitleLanguage.1)]$INFO[ListItem.Property(SubtitleLanguage.2), / ]$INFO[ListItem.Property(SubtitleLanguage.3), / ]$INFO[ListItem.Property(SubtitleLanguage.4), / ]$INFO[ListItem.Property(SubtitleLanguage.5), / ]$INFO[ListItem.Property(SubtitleLanguage.6), / ]$INFO[ListItem.Property(SubtitleLanguage.7), / ]$INFO[ListItem.Property(SubtitleLanguage.8), / ]$INFO[ListItem.Property(SubtitleLanguage.9), / ]$INFO[ListItem.Property(SubtitleLanguage.10), / ]$INFO[ListItem.Property(SubtitleLanguage.11), / ]$INFO[ListItem.Property(SubtitleLanguage.12), / ]$INFO[ListItem.Property(SubtitleLanguage.13), / ]$INFO[ListItem.Property(SubtitleLanguage.14), / ]$INFO[ListItem.Property(SubtitleLanguage.15), / ][/LOWERCASE]</label>
 								<label2>$LOCALIZE[287]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[287])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[ListItem.Property(SubtitleLanguage.1)]$ESCINFO[ListItem.Property(SubtitleLanguage.2), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.3), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.4), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.5), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.6), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.7), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.8), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.9), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.10), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.11), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.12), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.13), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.14), / ]$ESCINFO[ListItem.Property(SubtitleLanguage.15), / ])</onclick>
+								<onclick>SetFocus(64)</onclick>
 								<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1)) | !String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
 							</item>
 							<item>
@@ -622,23 +723,63 @@
 								<label2>$LOCALIZE[567]:</label2>
 								<visible>!String.IsEmpty(ListItem.PlayCount) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
 							</item>
+							<!-- timeZone make tag clickable -->
 							<item>
 								<label>$INFO[ListItem.Tag]</label>
 								<label2>$LOCALIZE[20459]:</label2>
-								<visible>!String.IsEmpty(ListItem.Tag) + String.IsEqual(ListItem.DBTYPE,movie) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[20459])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[ListItem.Tag])</onclick>
+								<onclick>SetFocus(64)</onclick>
+								<visible>!String.IsEmpty(ListItem.Tag) + String.IsEqual(ListItem.DBTYPE,movie)</visible>
 							</item>
+							<!-- timeZone make path clickable -->
 							<item>
 								<label>$INFO[ListItem.Path]</label>
 								<label2>$LOCALIZE[573]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[573])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[ListItem.Path])</onclick>
+								<onclick>SetFocus(64)</onclick>
 								<visible>!String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(ListItem.Path)</visible>
 							</item>
+							<!-- timeZone make filename clickable  -->
 							<item>
 								<label>$INFO[ListItem.Filename]</label>
 								<label2>$LOCALIZE[21800]:</label2>
+								<onclick>SetProperty(MoreInfoTitle,$LOCALIZE[21800])</onclick>
+								<onclick>SetProperty(MoreInfoContent,$ESCINFO[ListItem.Filename])</onclick>
+								<onclick>SetFocus(64)</onclick>
 								<visible>!String.IsEmpty(ListItem.Filename) + !String.IsEqual(ListItem.DBTYPE,set)</visible>
 							</item>
+							<!-- timeZone mod end for labels -->
 						</content>
 					</control>
+					<!-- timeZone mod start add label window which opens when label is clicked-->
+					<control type="group">
+						<left>3</left>
+						<top>66</top>
+						<include>VisibleFadeAnimation</include>
+						<visible>Control.HasFocus(64)</visible>
+						<control type="label">
+							<top>32</top>
+							<width>1198</width>
+							<height>40</height>
+							<font>font15d_MoreInfoTitle</font>
+							<textcolor>themecolor</textcolor>
+							<textoffsetx>20</textoffsetx>
+							<label>$INFO[Window(movieinformation).Property(MoreInfoTitle)]</label>
+						</control>
+						<control type="textbox">
+							<left>20</left>
+							<top>85</top>
+							<width>1158</width>
+							<height>280</height>
+							<align>justify</align>
+							<font>font15d_MoreInfoContent</font>
+							<label>$INFO[Window(movieinformation).Property(MoreInfoContent)]</label>
+							<autoscroll time="3000" delay="4000" repeat="5000"></autoscroll>
+						</control>
+					</control>
+					<!-- timeZone mod end -->
 				</control>
 					<control type="group">
 						<left>4</left>
@@ -701,9 +842,9 @@
 					<height>60</height>
 					<onleft>9000</onleft>
 					<onright>9000</onright>
-					<onup condition="!String.IsEqual(ListItem.DBTYPE,set)">300</onup>
-					<ondown condition="String.IsEqual(ListItem.DBTYPE,set)">50</ondown>
-					<ondown condition="!String.IsEqual(ListItem.DBTYPE,set)">90001</ondown>
+					<onup>300</onup>
+					<!-- <ondown>50</ondown> -->
+					<ondown>90001</ondown>
 					<align>left</align>
 					<orientation>horizontal</orientation>
 					<control type="button" id="895">
@@ -832,7 +973,7 @@
 						<width>1200</width>
 						<height>500</height>
 						<control type="button" id="90003">
-							<visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>
+							<!--<visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>-->
 							<left>10</left>
 							<top>-2</top>
 							<width>1200</width>
@@ -850,7 +991,7 @@
 						</control>
 						<!-- Plot -->
 						<control type="group">
-							<visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>
+							<!-- <visible>!String.IsEqual(ListItem.DBTYPE,set)</visible> -->
 							<left>26</left>
 							<top>20</top>
 							<control type="textbox" id="400">
@@ -858,7 +999,7 @@
 								<height>351</height>
 								<align>justify</align>
 								<font>font15info</font>
-								<label>$INFO[ListItem.Plot]</label>
+								<label>$ESCINFO[ListItem.Plot]</label>
 								<autoscroll time="3000" delay="4000" repeat="2000">Skin.HasSetting(Enable.AutoScroll)</autoscroll>
 								<animation effect="fade" start="0" end="100" time="500" tween="sine" easing="inout">VisibleChange</animation>
 								<animation effect="fade" start="100" end="78" time="300" tween="sine" easing="inout" condition="!Control.HasFocus(90003)">Conditional</animation>
@@ -867,7 +1008,7 @@
 							<control type="textbox" id="401">
 								<width>1162</width>
 								<height>351</height>
-								<label>$INFO[ListItem.Plot]</label>
+								<label>$ESCINFO[ListItem.Plot]</label>
 								<font>font15info</font>
 								<align>justify</align>
 								<autoscroll time="3000" delay="4000" repeat="2000">Skin.HasSetting(Enable.AutoScroll)</autoscroll>
@@ -886,7 +1027,7 @@
 							<fadetime>IconCrossfadeTime</fadetime>
 							<imagepath colordiffuse="bbffffff" background="true">$INFO[Control.GetLabel(6927)]</imagepath>
 							<visible>!String.IsEmpty(ListItem.Art(characterart)) | !String.IsEmpty(ListItem.Art(tvshow.characterart)) | !String.IsEmpty(ListItem.Art(clearart)) | !String.IsEmpty(ListItem.Art(clearlogo)) | !String.IsEmpty(ListItem.Art(discart)) | !String.IsEmpty(ListItem.Art(tvshow.clearart)) | !String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
-							<visible>!String.IsEqual(ListItem.DBTYPE,set) | [Integer.IsLess(Container(300).NumItems,7) + String.IsEqual(ListItem.DBTYPE,set)]</visible>
+							<!-- <visible>!String.IsEqual(ListItem.DBTYPE,set) | [Integer.IsLess(Container(300).NumItems,7) + String.IsEqual(ListItem.DBTYPE,set)]</visible> -->
 						</control>
 						<control type="group">
 							<visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>
