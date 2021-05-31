@@ -1568,7 +1568,7 @@
 			<visible>!Skin.HasSetting(showWidget)</visible>
 		</control>
 	</include>
-		<include name="ExtendedInfoAutoComplete">
+	<include name="ExtendedInfoAutoComplete">
 		<control type="group">
 			<animation effect="fade" start="100" end="0" time="300" condition="String.IsEmpty(Container(5000).ListItem.Label)">conditional</animation>
 			<visible>!System.HasHiddenInput</visible>
@@ -1745,7 +1745,8 @@
 	<include name="DefaultSetList">
 		<control type="panel" id="50">
 			<left>15</left>
-			<top>-500</top>
+			<!--timeZone Mod change -500 to 1110 -->
+			<top>1110</top>
 			<width>1196</width>
 			<height>500</height>
 			<orientation>horizontal</orientation>
