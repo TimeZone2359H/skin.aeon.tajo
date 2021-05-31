@@ -263,6 +263,12 @@
 			<size>23</size>
 		</font>
 		<font>
+			<name>Font_timeZone_minutes</name>
+			<filename>Quicksand.ttf</filename>
+			<linespacing>0.80</linespacing>
+			<size>43</size>
+		</font>
+		<font>
 			<name>Font_plot</name>
 			<filename>Quicksand.ttf</filename>
 			<size>27</size>
@@ -377,6 +383,12 @@
 			<filename>Quicksand.ttf</filename>
 			<linespacing>0.85</linespacing>
 			<size>36</size>
+		</font>
+		<font>
+			<name>Font_timeZone_hours</name>
+			<filename>Quicksand.ttf</filename>
+			<linespacing>0.85</linespacing>
+			<size>56</size>
 		</font>
 		<font>
 			<name>Font_list</name>
@@ -802,6 +814,20 @@
 			<linespacing>0.95</linespacing>
 			<size>31</size>
 		</font>
+		<!--timeZone mod start -->
+		<font>
+			<name>font15d_MoreInfoTitle</name>
+			<filename>Quicksand.ttf</filename>
+			<linespacing>0.95</linespacing>
+			<size>50</size>
+		</font>
+		<font>
+			<name>font15d_MoreInfoContent</name>
+			<filename>Quicksand.ttf</filename>
+			<linespacing>0.95</linespacing>
+			<size>40</size>
+		</font>
+		<!--timeZone mod end -->
 		<font>
 			<name>font16_title</name>
 			<filename>Quicksand.ttf</filename>
