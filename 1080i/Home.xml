@@ -83,7 +83,7 @@
 						<height>40</height>
 						<textcolor>white</textcolor>
 						<shadowcolor>black</shadowcolor>
-						<font>fontDiscog</font>
+						<font>Font_timeZone_hours</font>
 						<label>$INFO[System.Time(hh)]</label>
 					</control>
 					<control type="label">
@@ -92,7 +92,7 @@
 						<height>34</height>
 						<textcolor>white</textcolor>
 						<shadowcolor>black</shadowcolor>
-						<font>Font_bro</font>
+						<font>Font_timeZone_minutes</font>
 						<label>:$INFO[System.Time(mm)]</label>
 					</control>
 				</control>
