@@ -11,6 +11,7 @@
 				<visible>Player.HasAudio + ![String.IsEqual(Visualisation.Name,waveform) | String.Contains(Visualisation.Name,spectrum)]</visible>
 			</control>
 			<!-- Fanart -->
+			<!-- timeZone mod disable skin fanart-->
 			<control type="fadelabel" id="5785">
 				<top>-1000</top>
 				<width>1</width>
@@ -31,7 +32,8 @@
 				<scrollout>false</scrollout>
 				<resetonlabelchange>true</resetonlabelchange>
 			</control>
-			<control type="image">
+			<!-- timeZone mod start disable skin fanart to use AS instead -->
+			<!-- <control type="image">
 				<include>FullscreenDimensions</include>
 				<texture background="true">$INFO[Player.Art(artist.fanart)]</texture>
 				<visible>String.IsEmpty(Player.Art(artist.fanart1))</visible>
@@ -43,7 +45,7 @@
 				<imagepath background="true">$INFO[Control.GetLabel(5785)]</imagepath>
 			</control>
 			<!-- Artist SlideShow -->
-			<control type="image">
+			<!-- <control type="image">
 				<aspectratio>scale</aspectratio>
 				<include>FullscreenDimensions</include>
 				<fadetime>800</fadetime>
@@ -61,14 +63,32 @@
 				<imagepath background="true">$INFO[Window(Visualisation).Property(ArtistSlideshow)]</imagepath>
 				<visible>!String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow.ArtworkReady))</visible>
 				<visible>String.IsEmpty(Player.Art(artist.fanart))</visible>
+			</control>-->
+			<!-- timeZone mod start New ArtistSlideshow -->
+			<control type="image">
+				<aspectratio>scale</aspectratio>
+				<fadetime>400</fadetime>
+				<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+				<texture background="true">$INFO[Player.Art(fanart)]</texture>
+				<visible>String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow.Image))</visible>
 			</control>
+			<control type="image">
+				<aspectratio>scale</aspectratio>
+				<fadetime>400</fadetime>
+				<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+				<texture background="true">$INFO[Window(Visualisation).Property(ArtistSlideshow.Image)]</texture>
+				<visible>!String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow.Image))</visible>
+			</control>	
 			<control type="group">
 				<animation type="conditional" reversible="false" condition="Skin.HasSetting(3D)">
 					<effect type="rotatey" center="0,150" start="6" end="6"/>
 					<effect type="zoom" center="0,200" start="93" end="93"/>
 					<effect type="slide" end="0,-20"/>
 				</animation>
-				<control type="image">
+				<!--timeZone mod start disable Background -->
+				<!--<control type="image">
 					<animation effect="fade" end="60" condition="true">Conditional</animation>
 					<left>-15</left>
 					<top>-15</top>
@@ -76,7 +96,7 @@
 					<height>1310</height>
 					<texture background="true">tajo/background.png</texture>
 					<aspectratio>stretch</aspectratio>
-				</control>
+				</control> -->
 				<control type="image">
 					<left>-15</left>
 					<width>1950</width>
@@ -108,7 +128,7 @@
 								<height>40</height>
 								<textcolor>grey2</textcolor>
 								<shadowcolor>black</shadowcolor>
-								<font>fontDiscog</font>
+								<font>Font_timeZone_hours</font>
 								<label>$INFO[System.Time(hh)]</label>
 							</control>
 							<control type="label">
@@ -117,7 +137,7 @@
 								<height>34</height>
 								<textcolor>grey2</textcolor>
 								<shadowcolor>black</shadowcolor>
-								<font>Font_bro</font>
+								<font>Font_timeZone_minutes</font>
 								<label>:$INFO[System.Time(mm)]</label>
 							</control>
 						</control>
@@ -306,6 +326,7 @@
 							<font>font14t</font>
 							<scroll>true</scroll>
 							<scrollsuffix>  -  </scrollsuffix>
+							<scrollspeed>40</scrollspeed>
 							<label>[LOWERCASE][COLOR white]$INFO[MusicPlayer.Genre,, · ][/COLOR]$VAR[Spot_ify,,[COLOR white] ·[/COLOR]][COLOR white]$INFO[MusicPlayer.Bitrate, , [/COLOR]kbps[COLOR white] ·[/COLOR]][COLOR white]$INFO[MusicPlayer.BitsPerSample, ,[/COLOR] $LOCALIZE[612][COLOR white] ·[/COLOR]][/LOWERCASE][COLOR white]$INFO[MusicPlayer.Samplerate, ,[/COLOR]  kHz]</label>
 						</control>
 						<control type="label">
@@ -322,6 +343,23 @@
 							<scrollsuffix>  -  </scrollsuffix>
 							<label>[LOWERCASE][COLOR white]$INFO[MusicPlayer.Genre,, · ][/COLOR]$VAR[Spot_ify,,[COLOR white] ·[/COLOR]][COLOR white]$INFO[MusicPlayer.Bitrate, , [/COLOR]kbps[COLOR white] ·[/COLOR]][COLOR white]$INFO[MusicPlayer.BitsPerSample, ,[/COLOR] $LOCALIZE[612][COLOR white] ·[/COLOR]][/LOWERCASE][COLOR white]$INFO[MusicPlayer.Samplerate, ,[/COLOR]  kHz]</label>
 						</control>
+						<!-- TimeZone Mod for Artist Bio start-->
+						<control type="fadelabel">
+							<left>-1</left>
+							<top>380</top>
+							<width>880</width>
+							<height>18</height>
+							<align>left</align>
+							<textcolor>themecolor</textcolor>
+							<shadowcolor>black</shadowcolor>
+							<font>font14t</font>
+							<scroll>true</scroll>
+							<scrollsuffix>  -  </scrollsuffix>
+							<label>$INFO[Window(Visualisation).Property(ArtistSlideshow.ArtistBiography),$LOCALIZE[21887]: [COLOR grey],[/COLOR]]</label>
+							<label>$INFO[MusicPlayer.Artist,$LOCALIZE[31105] ,: ]$INFO[Window(Visualisation).Property(ArtistSlideshow.1.AlbumName),[COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.2.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.3.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.4.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.5.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.6.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.7.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.8.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.9.AlbumName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.10.AlbumName), • [COLOR grey],[/COLOR]]</label>
+							<label>$INFO[Window(Visualisation).Property(ArtistSlideshow.1.SimilarName),$LOCALIZE[31104]: [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.2.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.3.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.4.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.5.SimilarName), •	[COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.6.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.7.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.8.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.9.SimilarName), • [COLOR grey],[/COLOR]]$INFO[Window(Visualisation).Property(ArtistSlideshow.10.SimilarName), • [COLOR grey],[/COLOR]]</label>
+						</control>
+						<!-- TimeZone Mod for Artist Bio end-->
 						<control type="image">
 							<visible>!Skin.HasSetting(noRating)</visible>
 							<left>-60</left>
