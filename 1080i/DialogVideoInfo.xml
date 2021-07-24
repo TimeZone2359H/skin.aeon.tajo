@@ -395,7 +395,7 @@
 							<include>MediaFlagVars</include>
 							<texture fallback="flags/mpaa/NR.png">$VAR[mpaa]</texture>
 						</control>
-						<!-- Main Rating -->
+						<!-- TimeZone Mod show IMDB, TMDB and Trakt Ratings -->
 						<control type="group">
 							<visible>!String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(ListItem.Rating(imdb))</visible>
 							<width>65</width>
@@ -434,6 +434,48 @@
 								<height>40</height>
 								<align>center</align>
 								<label>TMDB</label>
+								<font>font12</font>
+								<textcolor>themecolor</textcolor>
+							</control>
+						</control>
+						<control type="group">
+							<visible>!String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(ListItem.Rating(tmdb))</visible>
+							<width>70</width>
+							<control type="label">
+								<width>auto</width>
+								<height>60</height>
+								<align>center</align>
+								<label>$INFO[ListItem.Rating(tmdb)]</label>
+								<font>font16_title_bold</font>
+								<textcolor>grey</textcolor>
+							</control>
+							<control type="label">
+								<top>50</top>
+								<width>auto</width>
+								<height>40</height>
+								<align>center</align>
+								<label>TMDB</label>
+								<font>font12</font>
+								<textcolor>themecolor</textcolor>
+							</control>
+						</control>
+						<control type="group">
+							<visible>!String.IsEqual(ListItem.DBTYPE,set) + !String.IsEmpty(ListItem.Rating(trakt))</visible>
+							<width>80</width>
+							<control type="label">
+								<width>auto</width>
+								<height>60</height>
+								<align>center</align>
+								<label>$INFO[ListItem.Rating(trakt)]</label>
+								<font>font16_title_bold</font>
+								<textcolor>grey</textcolor>
+							</control>
+							<control type="label">
+								<top>50</top>
+								<width>auto</width>
+								<height>40</height>
+								<align>center</align>
+								<label>TRAKT</label>
 								<font>font12</font>
 								<textcolor>themecolor</textcolor>
 							</control>
