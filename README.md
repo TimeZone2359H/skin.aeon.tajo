@@ -9,4 +9,4 @@ This is a modified version of Manfeed's Aeon Tajo. Changes include;
 4.	Add TV show status i.e ended, continuing, returning series, cancelled etc.
 5.	Add movie set labels including years, directors, writers, genres and countries using skin info helper addon.
 6.	Add artist biography, discography and similar artist that scroll as RSS feed in music visualization window
-7.	Add Tomatometer and Metacritic Ratings. Show both IMDB,TMDB and Trakt ratings simultaneously 
+7.	Add Tomatometer and Metacritic Ratings. Show IMDB,TMDB and Trakt ratings simultaneously 
