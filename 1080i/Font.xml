@@ -310,7 +310,7 @@
 		<font>
 			<name>font10t</name>
 			<filename>Quicksand.ttf</filename>
-			<size>19</size>
+			<size>15</size>
 		</font>
 		<font>
 			<name>font12d</name>
@@ -327,7 +327,7 @@
 			<name>font14_bold</name>
 			<filename>Quicksand.ttf</filename>
 			<style>bold</style>
-			<size>30</size>
+			<size>28</size>
 		</font>
 		<font>
 			<name>font15t</name>
@@ -1188,7 +1188,7 @@
 		<font>
 			<name>font10t</name>
 			<filename>Arialuni.ttf</filename>
-			<size>21</size>
+			<size>17</size>
 		</font>
 		<font>
 			<name>font12d</name>
@@ -1205,7 +1205,7 @@
 			<name>font14_bold</name>
 			<filename>Arialuni.ttf</filename>
 			<style>bold</style>
-			<size>33</size>
+			<size>31</size>
 		</font>
 		<font>
 			<name>font15t</name>

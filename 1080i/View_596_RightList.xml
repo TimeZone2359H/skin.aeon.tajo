@@ -1164,10 +1164,11 @@
 				<aspectratio aligny="bottom">keep</aspectratio>
 			</control>
 			<control type="group">
-				<top>-20</top>
-				<left>700</left>
-				<animation effect="rotatey" center="auto" start="-7" end="-7" time="0" condition="true">Conditional</animation>
+				<top>-17</top>
+				<left>480</left>
+				<animation effect="slide" end="-480,0" time="0" condition="Skin.HasSetting(OnlineRating)">Conditional</animation>
 				<include>IconsRightList</include>
+				<include condition="Skin.HasSetting(OnlineRating)">RatingsShelf</include>
 			</control>
 			<control type="label">
 				<animation effect="slide" start="0,0" end="-55,0" time="200" easing="inout" tween="cubic" condition="Control.HasFocus(80) | Control.HasFocus(5919)">Conditional</animation>
