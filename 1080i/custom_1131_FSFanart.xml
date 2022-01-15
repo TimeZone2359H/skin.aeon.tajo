@@ -4,6 +4,9 @@
 	<animation effect="fade" time="500">WindowOpen</animation>
 	<animation effect="fade" time="300">WindowClose</animation>
 	<onunload>ClearProperty(FSFanart,movieinformation)</onunload>
+	<!-- TimeZone Mod add music fanart start -->
+	<onunload>ClearProperty(FSFanart,musicinformation)</onunload>
+	<!-- TimeZone Mod add music fanart end -->
 	<controls>
 		<control type="button" id="90300">
 			<description>FS Fanart button</description>
@@ -19,6 +22,9 @@
 			<include>FullscreenDimensions</include>
 			<aspectratio>scale</aspectratio>
 			<texture>$INFO[Window(movieinformation).Property(FSFanart)]</texture>
+			<!-- TimeZone Mod add music fanart start -->
+			<texture>$INFO[Window(musicinformation).Property(FSFanart)]</texture>
+			<!-- TimeZone Mod add music fanart end -->
 		</control>
 	</controls>
 </window>
