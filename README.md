@@ -2,7 +2,7 @@
 Last Update: 15th Jan 2022
 Skin for Kodi.
 
-This is a modified version of Manfeed's Aeon Tajo. Changes include;
+This is a very slighlty modified version of Manfeed's Aeon Tajo. Changes include;
 1.	Add a bigger clock in home and music visualization windows
 2.	Use coloured studio icon instead of white (redundant with the lastest skin) in videodialog window and make the icons slightly bigger
 3.	Add last aired and next aired for TV shows using TMDB helper addon
