@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+
+<!--TimeZone add new variables start-->
+	<variable name="ArtworkLogoVar">
+		<value condition="!String.IsEmpty(ListItem.Art(albumartist.clearlogo))">$INFO[ListItem.Art(albumartist.clearlogo)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(artist.clearlogo))">$INFO[ListItem.Art(artist.clearlogo)]</value>
+		<value>$INFO[ListItem.Art(clearlogo)]</value>
+	</variable>
+	<variable name="ArtworkDiscVar">
+		<value condition="!String.IsEmpty(ListItem.Art(album.discart))">$INFO[ListItem.Art(album.discart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(discart))">$INFO[ListItem.Art(discart)]</value>
+		<value condition="!String.IsEmpty(Container.ListItem.Art(discart))">$INFO[Container.ListItem.Art(discart)]</value>
+	</variable>
+		<variable name="MusicInfoPlotVar">
+		<value condition="String.IsEqual(ListItem.DBTYPE,album) + !String.IsEmpty(ListItem.Property(Album_Description))">$INFO[ListItem.Property(Album_Description)]</value>
+		<value condition="String.IsEqual(ListItem.DBTYPE,album)">$LOCALIZE[414]</value>
+		<value condition="[String.IsEqual(ListItem.DBTYPE,artist) | String.IsEqual(ListItem.DBTYPE,song)] + !String.IsEmpty(ListItem.Property(Artist_Description))">$INFO[ListItem.Property(Artist_Description)]</value>
+		<value condition="String.IsEqual(ListItem.DBTYPE,artist) | String.IsEqual(ListItem.DBTYPE,song)">$LOCALIZE[547]</value>
+	</variable>
+		<variable name="MusicPlotVar">
+		<value condition="!String.IsEmpty(ListItem.Property(Album_Description))">$INFO[ListItem.Property(Album_Description)]</value>
+		<value condition="!String.IsEmpty(ListItem.Property(Artist_Description))">$INFO[ListItem.Property(Artist_Description)]</value>
+		<value condition="!String.IsEmpty(ListItem.AddonDescription)">$INFO[ListItem.AddonDescription]$INFO[ListItem.AddonDisclaimer, -- [COLOR $VAR[themecolor]],[/COLOR]]</value>
+		<value condition="!String.IsEmpty(ListItem.Comment)">$INFO[ListItem.Comment]</value>
+		<value>$INFO[ListItem.Plot]</value>
+	</variable>
+	<variable name="MusicInfoIconVar">
+		<value condition="ControlGroup(9001).HasFocus(9050) + !String.IsEmpty(Container(9050).ListItem.Icon)">$INFO[Container(9050).ListItem.Icon]</value>
+		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<variable name="DialogInfoBackgroundVar">
+		<value>$INFO[ListItem.Art(fanart)]</value>
+	</variable>
+		<variable name="ArtistInfoPathVar">
+		<value condition="!System.GetBool(musiclibrary.showcompilationartists)">musicdb://artists/$INFO[ListItem.DBID]/?albumartistsonly=true</value>
+		<value>musicdb://artists/$INFO[ListItem.DBID]/?albumartistsonly=false</value>
+	</variable>
+	<variable name="ArtistAlbumInfoPathVar">
+		<value condition="!System.GetBool(musiclibrary.showcompilationartists)">musicdb://artists/$INFO[ListItem.DBID]/$INFO[Window(musicinformation).Property(AlbumDBID)]/?albumartistsonly=true&amp;artistid=$INFO[ListItem.DBID]</value>
+		<value>musicdb://artists/$INFO[ListItem.DBID]/$INFO[Window(musicinformation).Property(AlbumDBID)]/?albumartistsonly=false&amp;artistid=$INFO[ListItem.DBID]</value>
+	</variable>
+<!--TimeZone add new variables end-->	
+
 	<variable name="getDBIDcontent">
 		<value condition="!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode)]">plugin://script.embuary.helper/?info=getbydbid&amp;dbid=$INFO[ListItem.DBID]&amp;type=$INFO[ListItem.DBType]</value>
 		<value>-</value>
@@ -177,6 +219,7 @@
 		<value condition="String.IsEqual(ListItem.DBTYPE,set)">$INFO[ListItem.Title]</value>
 		<value condition="String.IsEqual(ListItem.DBTYPE,episode)">[COLOR themecolor]$VAR[EpisodeCountVar][/COLOR]  $INFO[ListItem.Title]</value>
 		<value>$INFO[ListItem.Title] $INFO[ListItem.Year,(,)]</value>
+		
 	</variable>
 	<variable name="Title_Tag">
 		<value condition="!String.IsEmpty(ListItem.OriginalTitle) + !String.IsEmpty(ListItem.Tagline)">$INFO[ListItem.OriginalTitle] - [COLOR=grey]$INFO[ListItem.Tagline][/COLOR]</value>
