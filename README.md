@@ -1,5 +1,5 @@
 # skin.aeon.tajo
-
+Last Update: 15th Jan 2022
 Skin for Kodi.
 
 This is a modified version of Manfeed's Aeon Tajo. Changes include;
@@ -10,3 +10,4 @@ This is a modified version of Manfeed's Aeon Tajo. Changes include;
 5.	Add movie set labels including years, directors, writers, genres and countries using skin info helper addon.
 6.	Add artist biography, discography and similar artist that scroll as RSS feed in music visualization window
 7.	Add Tomatometer and Metacritic Ratings. Show IMDB, TMDB and Trakt ratings simultaneously (This is redundant, the skin supports it natively now.)
+8.	Revamp DialogMusicInfo. Use the Aeon Nox Code for Artist, Album and Track Info.
